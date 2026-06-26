@@ -1,0 +1,22 @@
+{
+  "_comment": "Example hooks wiring for Claude Code settings.json. Adjust matchers/paths to taste. Copy the hooks/ scripts into ~/.claude/hooks/ first.",
+  "hooks": {
+    "PreToolUse": [
+      { "matcher": "Bash", "hooks": [{ "type": "command", "command": "node ~/.claude/hooks/block-no-verify.js" }] },
+      { "matcher": "Bash", "hooks": [{ "type": "command", "command": "node ~/.claude/hooks/pre-tool-overnight-guard.js" }] },
+      { "matcher": "Edit|Write", "hooks": [{ "type": "command", "command": "node ~/.claude/hooks/config-protection.js" }] },
+      { "matcher": "Write", "hooks": [{ "type": "command", "command": "node ~/.claude/hooks/doc-file-warning.js" }] }
+    ],
+    "PostToolUse": [
+      { "matcher": "Write|Edit", "hooks": [{ "type": "command", "command": "node ~/.claude/hooks/validate-memory-write.js" }] },
+      { "matcher": ".*", "hooks": [{ "type": "command", "command": "node ~/.claude/hooks/cost-cap-enforce.js" }] }
+    ],
+    "SessionStart": [
+      { "hooks": [
+        { "type": "command", "command": "node ~/.claude/hooks/session-start-hot-learnings.js" },
+        { "type": "command", "command": "node ~/.claude/hooks/session-start-hot-size.js" },
+        { "type": "command", "command": "node ~/.claude/hooks/session-start-memory-size.js" }
+      ] }
+    ]
+  }
+}
