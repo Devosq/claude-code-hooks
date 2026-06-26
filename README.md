@@ -77,4 +77,4 @@ node --check hooks/*.js   # CI runs this — every hook must parse
 ```
 
 ## License
-[MIT](./LICENSE) © Devosq
+[MIT](./LICENSE) © Oscar Vatanen
